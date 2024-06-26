@@ -1,0 +1,52 @@
+<!-- templates/edit_party_record.html -->
+{% extends "common.html" %}
+
+{% block title %}Edit Party Record{% endblock %}
+
+{% block content %}
+<style>
+    form {
+        margin: 20px;
+        padding: 20px;
+        border-radius: 5px;
+    
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        font-weight: bold;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .form-group input[type="submit"] {
+        width: auto;
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    .form-group input[type="submit"]:hover {
+        background-color: darkblue;
+    }
+</style>
+
+<h2>Edit Party Record</h2>
+{% for msg in messages %}
+<p>{{msg}}</p>
+{% endfor %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-group">
+        <input type="submit" value="Save">
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends "common.html" %}
+
+{% block title %}Party{% endblock %}
+
+{% block content %}
+<style>
+    .details {
+        padding-top: 40px;
+        width: 99%;
+        height: 99%;
+        margin-right: auto;
+        border-radius: 2px;
+        color:black;
+    }
+    
+    .details p {
+        text-decoration: none;
+        color:black;
+    }
+    
+    #btn {
+        background-color: rgb(26, 22, 227);
+        border-radius: 15px;
+        width:100px;
+        height: 35px;
+    }
+    
+    #btn:hover {
+        background-color: rgb(3, 184, 60);
+    }
+    .pnl {
+        margin-top: 8px;
+        text-decoration: none;
+        color: white;
+        border-radius: 2px;
+        padding: 10px;
+        width:270px;
+        margin-left: 450px;
+        box-shadow: 0 4px 5px rgba(193, 191, 191, 0.2), 
+                    0 -4px 5px rgba(255, 80, 80, 0.2), 
+                    4px 0 4px rgba(141, 139, 139, 0.2), 
+                    -4px 0 4px rgba(58, 57, 57, 0.2);
+    }
+    #bttn {
+        background-color: red;
+        border-radius: 5px;
+        position: sticky;
+    }
+    #bttn:hover {
+        background-color: rgb(13, 239, 239);
+    }
+    #search {
+        padding: 5px;
+        border-radius: 3px;
+        position: sticky;
+    }
+    #float {
+        float:left;
+        padding:20px;
+        margin: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 5px rgba(193, 191, 191, 0.2), 
+                    0 -4px 5px rgba(255, 80, 80, 0.2), 
+                    4px 0 4px rgba(141, 139, 139, 0.2), 
+                    -4px 0 4px rgba(58, 57, 57, 0.2);
+    }
+    #pagination a {
+        border: 0.5px solid rgb(251, 246, 246);
+        padding: 2px;
+        background-color: blue;
+        border-radius: 3px;
+    }
+</style>
+
+<div class="details">
+    <div class="pnl">
+        <form method="get" action="{% url 'search_records_party' %}">
+            {% csrf_token %}
+            <input type="text" name="search_query" placeholder="Enter search name" id='search' required>
+            <button type="submit" id="bttn">Search</button>
+        </form>
+    </div>
+    <center>
+        <h1>Recent Party Records:</h1>
+    </center>
+    <ul>
+        {% for party in page_obj %}
+            <div id="float">
+                <p style="color:rgb(236, 73, 9)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                    </svg>
+                    Name: {{ party.party_name }}
+                </p>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                    </svg>
+                    Address: {{ party.party_address }}
+                </p>
+                <button id="btn"><a href="{% url 'party_detail_view' party.pk %}">View Details</a></button><br><br>
+            </div>
+        {% endfor %}
+    </ul>
+    <div id="pagination" style="float:left;margin-left: 80%;">
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                        <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                    </svg>Previous
+                </a>
+            {% endif %}
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <a href="?page={{ i }}" class="active">{{ i }}</a>
+                {% else %}
+                    <a href="?page={{ i }}">{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">
+                    Next<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"/>
+                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

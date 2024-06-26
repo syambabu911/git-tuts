@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}base{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            background-color: blue;
+            width: 100%;
+            height: 100px;
+            color: rgb(234, 223, 223);
+            padding: 0 10px;
+        }
+        .logo {
+            justify-self: start;
+            font-size: 1.5em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        a {
+            text-decoration: none;
+            color: rgb(244, 234, 234);
+        }
+        h3 {
+            margin: 0;
+            font-size: 1em;
+        }
+        #buttn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(230, 23, 23);
+            width: 90px;
+            height: 30px;
+            box-shadow: 2px 3px rgb(37, 38, 37);
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        #buttn:hover {
+            background-color: darkorange;
+        }
+        .nav-links a:hover {
+            color: rgb(239, 233, 237);
+            transition: 0.5s;
+            background-color: rgb(7, 232, 3);
+            border-radius: 8px;
+            padding: 5px;
+        }
+        /* For mobile phones: */
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+    .nav-links {
+        padding: 0 10px;
+    }
+}
+
+/* For tablets: */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    .nav-links{
+        padding: 0 20px;
+    }
+}
+
+/* For desktops: */
+@media only screen and (min-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+    .nav-links {
+        padding: 0 20px;
+    }
+}
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+}
+.nav-links {
+    flex: 1 1 auto;
+}
+
+       
+        
+    </style>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="icon"  href="https://res.cloudinary.com/dpokywvc3/image/upload/v1701429447/IMG_20220111_220816_029-photoaidcom-cropped.jpg_qojv7a.png">
+
+</head>
+<body>
+    <header>
+        <h3 class="logo">Paddy Management System</h3>
+        {% if user.is_authenticated %}
+        <div class="nav-links">
+            <h3><a href="{% url 'homepage' %}">Home</a></h3>
+            <h3><a href="{% url 'add_party_record' %}">Create Party</a></h3>
+            <h3><a href="{% url 'add_mill_record' %}">Create Mills</a></h3>
+            <h3><a href="{% url 'party' %}">Party</a></h3>
+            <h3><a href="{% url 'mills' %}">Mills</a></h3>
+            <h3><a href="{% url 'ledger' %}">Ledger</a></h3>
+            <h3><a href="{% url 'interest_entry' %}">ITC</a></h3>
+            <h3><a href="{% url 'view_records' %}">PNL</a></h3>
+            <h3 style="color:yellow">Raghavendra Rice</h3>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" id="buttn"><span class="material-symbols-outlined">logout</span> Logout</button>
+            </form>
+            <h3 style="color:yellow;display: flex; margin-top: 40px;">{{ request.user.username }}</h3>  <!-- Display username -->
+        </div>
+        {% endif %}
+    </header>
+    {% block content %}{% endblock %}
+</body>
+</html>

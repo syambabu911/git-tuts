@@ -1,0 +1,16 @@
+{% extends "common.html" %}
+{% block title %}Add Party Record{% endblock %}
+
+{% block content %}
+<div class="details">
+    <center>
+        <p style="color:rgb(51, 150, 51)">{{msg}}</p>
+        <h2>Add Party Record</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Party Record</button>
+        </form>
+    </center>
+</div>
+{% endblock %}

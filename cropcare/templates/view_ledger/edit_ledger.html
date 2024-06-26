@@ -1,0 +1,44 @@
+{% extends "common.html" %}
+{% block title %}Edit ledger Entry{% endblock %}
+{% block content %}
+    <style>
+        input {
+            width: 500px;
+            height: 30px;
+        }
+        center {
+            border: 2px solid lightgrey;
+            width: 700px;
+            height: auto;
+            margin-left: 200px;
+            margin-top: 100px;
+            background-color: lightslategrey;
+            border-radius: 5px;
+        }
+        #btn {
+            background-color: red;
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+        }
+        #btn:hover {
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        {% for msg in messages %}
+        <p>{{msg}}</p>
+        {% endfor %}
+        <div class="form-container">
+            <h2>Edit Ledger Entry</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" id="btn">Save</button>
+            </form>
+        </div>
+    </center>
+</body>
+{% endblock %}

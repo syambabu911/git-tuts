@@ -1,0 +1,119 @@
+{% extends "common.html" %}
+
+{% block title %}Record Details{% endblock %}
+
+{% block content %}
+<style>
+    .record-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    .record-table th, .record-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    .record-table th {
+        background-color: #f2f2f2;
+        color: black;
+    }
+    .record-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .record-table tr:hover {
+        background-color: #ddd;
+    }
+</style>
+
+<h2>Record Details</h2>
+{% for record in records %}
+
+<table class="record-table">
+    <tr>
+        <th>Date</th>
+        <td>{{ record.date }}</td>
+    </tr>
+    <tr>
+        <th>KL No</th>
+        <td>{{ record.kl_no }}</td>
+    </tr>
+    <tr>
+        <th>Mill Name</th>
+        <td>{{ record.mill_name }}</td>
+    </tr>
+    <tr>
+        <th>Mill Place</th>
+        <td>{{ record.mill_place }}</td>
+    </tr>
+    <tr>
+        <th>Mill Rate</th>
+        <td>{{ record.mill_rate }}</td>
+    </tr>
+    <tr>
+        <th>Mill Weight</th>
+        <td>{{ record.mill_weight }}</td>
+    </tr>
+    <tr>
+        <th>Mill Remarks</th>
+        <td>{{ record.mill_remarks }}</td>
+    </tr>
+    <tr>
+        <th>Mill Total Wages</th>
+        <td>{{ record.mill_total_wages }}</td>
+    </tr>
+    <tr>
+        <th>Party Name</th>
+        <td>{{ record.party_name }}</td>
+    </tr>
+    <tr>
+        <th>Party Address</th>
+        <td>{{ record.party_address }}</td>
+    </tr>
+    <tr>
+        <th>Party Weight</th>
+        <td>{{ record.party_weight }}</td>
+    </tr>
+    <tr>
+        <th>Paddy Variety</th>
+        <td>{{ record.paddy_variety }}</td>
+    </tr>
+    <tr>
+        <th>Lorry No</th>
+        <td>{{ record.lorry_no }}</td>
+    </tr>
+    <tr>
+        <th>Lorry Advance</th>
+        <td>{{ record.lorry_advance }}</td>
+    </tr>
+    <tr>
+        <th>Lorry Total Fare</th>
+        <td>{{ record.lorry_total_fare }}</td>
+    </tr>
+    <tr>
+        <th>Gennius Qty</th>
+        <td>{{ record.gennius_qty }}</td>
+    </tr>
+    <tr>
+        <th>Gennius Price</th>
+        <td>{{ record.gennius_price }}</td>
+    </tr>
+    <tr>
+        <th>Party Rate Type</th>
+        <td>{{ record.party_rate_type }}</td>
+    </tr>
+    <tr>
+        <th>Mill Rate Type</th>
+        <td>{{ record.mill_rate_type }}</td>
+    </tr>
+    <tr>
+        <th>Party Calculation Type</th>
+        <td>{{ record.party_calculation_type }}</td>
+    </tr>
+    <tr>
+        <th>Mill Calculation Type</th>
+        <td>{{ record.mill_calculation_type }}</td>
+    </tr>
+</table>
+{% endfor %}
+{% endblock %}

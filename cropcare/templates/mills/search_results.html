@@ -1,0 +1,57 @@
+{% extends "common.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<style>
+    table {
+        margin: auto;
+        border-collapse: collapse;
+        margin-top: 50px;
+        width: 50%;
+    }
+    th, td {
+        border: 1px solid #ddd; /* Use a light grey color for the borders */
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+<center>
+    <div class="pnl">
+        <h2>Search Results for "{{ query }}"</h2>
+        <h3>Mills Records</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>SL.NO</th>
+                    <th>KL.NO</th>
+                    <th>Mill Name</th>
+                    <th>Mill Place</th>
+                    <th>Mill Rate</th>
+                    <th>Mill Weight</th>
+                    <th>Mill Remarks</th>
+                    <th>Mill Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in mills_records %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ record.kl_no }}</td>
+                    <td>{{ record.mill_name }}</td>
+                    <td>{{ record.mill_place }}</td>
+                    <td>{{ record.mill_rate }}</td>
+                    <td>{{ record.mill_weight }}</td>
+                    <td>{{ record.mill_remarks }}</td>
+                    <td>{{ record.mill_amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</center>
+{% endblock %}

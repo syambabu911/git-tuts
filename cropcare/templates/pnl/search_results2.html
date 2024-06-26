@@ -1,0 +1,56 @@
+{% extends "common.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<style>
+    table {
+        margin: auto;
+        border-collapse: collapse;
+        margin-top: 50px;
+        width: 80%;
+    }
+    th, td {
+        border: 1px solid #ddd; /* Use a light grey color for the borders */
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+<center>
+    <div class="pnl">
+        <h2>Search Results for "{{ query }}"</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>KL No</th>
+                    <th>Mill Name</th>
+                    <th>Party Name</th>
+                    <th>Mill Amount</th>
+                    <th>Party Amount</th>
+                    <th>Net Profit/Loss</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.kl_no }}</td>
+                    <td>{{ transaction.mill_name }}</td>
+                    <td>{{ transaction.party_name }}</td>
+                    <td>{{ transaction.mill_amount }}</td>
+                    <td>{{ transaction.party_amount }}</td>
+                    <td>{{ transaction.net_profit_loss }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table><br>
+        <h3>Total Mill Amount: {{ total_mill_amount }}</h3><br>
+        <h3>Total Party Amount: {{ total_party_amount }}</h3><br>
+        <h3>Net Profit/Loss: {{ net_profit_loss }}</h3>
+        
+    </div>
+</center>
+{% endblock %}

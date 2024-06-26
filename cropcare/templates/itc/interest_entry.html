@@ -1,0 +1,46 @@
+{% extends "common.html" %}
+
+{% block title %}Interest Entry{% endblock %}
+
+{% block content %}
+<style>
+    .links a {
+        color: rgb(48, 48, 215);
+        text-decoration: none;
+    }
+    #form {
+        box-shadow: -5px -2px 8px rgb(120, 119, 119);  
+        margin-top: 50px;
+        width: 300px;
+        height: 390px;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 100px;
+    }
+    #form:hover {
+        cursor: pointer;
+        background-color: rgb(191, 120, 132);
+    }
+</style>
+<center>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="{% url 'interest_entry' %}" method="post" id="form">
+        {% csrf_token %}
+        <div class="links">
+            <a href="{% url 'view_credits' %}">View Credits</a>
+            <a href="{% url 'view_debits' %}">View Debits</a>
+            <h2>INTEREST ENTRY FORM</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+</center>
+{% endblock %}
