@@ -1,0 +1,63 @@
+{% extends "common.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<style>
+    table {
+        margin: auto;
+        border-collapse: collapse;
+        margin-top: 50px;
+        width: 50%;
+    }
+    th, td {
+        border: 1px solid #ddd; /* Use a light grey color for the borders */
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+<center>
+    <div class="pnl">
+        <h2>Search Results for "{{ query }}"</h2>
+    <div class="pnl">
+        <h3>Party Records</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>SL.NO</th>
+                    <th>Party Name</th>
+                    <th>Party Address</th>
+                    <th>Party Weight</th>
+                    <th>Party Rate</th>
+                    <th>Paddy Variety</th>
+                    <th>Lorry No</th>
+                    <th>Lorry Advance</th>
+                    <th>Lorry Total Fare</th>
+                    <th>Gennius Qty</th>
+                    <th>Gennius Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in party_records %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ record.party_name }}</td>
+                    <td>{{ record.party_address }}</td>
+                    <td>{{ record.party_weight }}</td>
+                    <td>{{ record.party_rate }}</td>
+                    <td>{{ record.paddy_variety }}</td>
+                    <td>{{ record.lorry_no }}</td>
+                    <td>{{ record.lorry_advance }}</td>
+                    <td>{{ record.lorry_total_fare }}</td>
+                    <td>{{ record.gennius_qty }}</td>
+                    <td>{{ record.gennius_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+</center>
+{% endblock %}

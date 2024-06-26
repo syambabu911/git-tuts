@@ -1,0 +1,17 @@
+{% extends "common.html" %}
+{% block title %}Add Mill Record{% endblock %}
+
+{% block content %}
+<div class="details">
+    <center>
+        <p style="color:rgb(96, 237, 52)">{{msg}}</p>
+        <h2>Add Mill Record</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Mill Record</button>
+        </form>
+    </center>
+</div>
+{% endblock %}
+

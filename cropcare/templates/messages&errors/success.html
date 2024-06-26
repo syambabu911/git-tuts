@@ -1,0 +1,11 @@
+{% extends "common.html" %}
+
+{% block title %}Success{% endblock %}
+
+{% block content %}
+<center>
+    <h1>Success</h1>
+    <p>Your data has been successfully submitted.</p>
+    <a href="{% url 'interest_entry' %}" style="color:blue">Go back to form</a>
+</center>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "common.html" %}
+{% block title %}Ledger{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h5 {
+        margin: 10px 0;
+    }
+
+    .section {
+        margin: 20px 0;
+    }
+
+    .section h5 {
+        margin: 10px 0;
+    }
+
+    .section {
+        border: 1px solid #ccc;
+        margin: 10px 0;
+        width: 70%;
+        box-shadow: 0 4px 5px rgba(193, 191, 191, 0.2), 
+                    0 -4px 5px rgba(255, 80, 80, 0.2), 
+                    4px 0 4px rgba(141, 139, 139, 0.2), 
+                    -4px 0 4px rgba(58, 57, 57, 0.2);
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .payment {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+       
+    }
+
+    .payment a {
+        text-decoration: none;
+        padding-top: 8px;
+        color: blue;
+    }
+
+    .one {
+        width: 60%;
+    }
+</style>
+
+<center>
+    <div class="section one">
+        <h5>Total Ledger Entries</h5>
+        <h5>💵 In Pocket: Rs. {{ total_amount }}</h5>
+    </div>
+    <div class="section one">
+        <div class="payment">
+            <h5>Mill Balance: Rs. {{ mill_balance }}/-</h5>
+            <h5>Total Mill Amount: Rs. {{ total_mill_amount }}/-</h5>
+            <h5>Total Party Amount: Rs. {{ total_party_amount }}/-</h5>  
+        </div>
+        <div class="payment">
+            <h5>Party Balance: Rs. {{ party_balance }}/-</h5>
+            <h5>Mill Paid: Rs. {{ mill_paid }}/-</h5>
+            <h5>Party Paid: Rs. {{ party_paid }}/-</h5>
+            <a href="{% url 'view_ledger' %}">Edit</a>
+            <a href="{% url 'view_ledger' %}">Payment Status</a>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>SL.NO</th>
+                    <th>Transaction Date</th> 
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Party/Mill</th>
+                    <th>Created At</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in ledger_entries %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>  
+                    <td>{{ entry.transaction_date }}</td>
+                    <td>{{ entry.name }}</td>
+                    <td>{{ entry.amount }}</td>
+                    <td>{{ entry.party_or_mill }}</td>
+                    <td>{{ entry.created_at|date:"M d, Y, h:i A" }}</td>
+                    <td><input type="checkbox" {% if entry.payment_status %}checked{% endif %} disabled></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</center>
+{% endblock %}

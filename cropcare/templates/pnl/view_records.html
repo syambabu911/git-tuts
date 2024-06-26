@@ -1,0 +1,138 @@
+{% extends "common.html" %}
+
+{% block title %}P&L Report{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        box-shadow: -1px -3px 3px lightgrey;
+        padding: 70px;
+    }
+    div input[type="text"]{
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    #search{
+        width: 100px;
+        height: 32px;
+    }
+    .pnl{
+        margin: 5px 0;
+        padding: 5px;
+        box-shadow: 0 4px 5px rgba(193, 191, 191, 0.2), 
+                    0 -4px 5px rgba(255, 80, 80, 0.2), 
+                    4px 0 4px rgba(141, 139, 139, 0.2), 
+                    -4px 0 4px rgba(58, 57, 57, 0.2);
+        
+    }
+    table {
+        width: 70%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: -1px -3px 3px lightgrey;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .pnl a {
+        margin-top: 20px;
+        text-decoration: none;
+        color: white;
+        border-radius: 5px;
+        background-color: rgb(101, 227, 181);
+        height: 25px;
+        padding: 2px 5px 0 5px;
+    }
+    .pnl a:hover {
+        background-color: #0056b3;
+    }
+    .pnl1 {
+        margin-top: 8px;
+        text-decoration: none;
+        color: white;
+        border-radius: 2px;
+        padding: 3px;
+        width:270px;
+        box-shadow: 0 4px 5px rgba(193, 191, 191, 0.2), 
+                    0 -4px 5px rgba(255, 80, 80, 0.2), 
+                    4px 0 4px rgba(141, 139, 139, 0.2), 
+                    -4px 0 4px rgba(58, 57, 57, 0.2);
+    }
+    #bttn{
+        background-color: red;
+        border-radius: 5px;
+        position: sticky;
+    }
+    #bttn:hover{
+        background-color: rgb(13, 239, 239);
+    }
+    #search{
+        padding: 5px;
+        border-radius: 3px;
+        position: sticky;
+        width:170px;
+    }
+</style>
+<center>
+    <div class="pnl1">
+        <form method="get" action="{% url 'search_records_pnl' %}">
+        {% csrf_token %}
+        <input type="text" name="search_query" placeholder="Enter search name" id="search" required>
+        <button type="submit" id="bttn">Search</button>
+        </form>
+    </div>
+    <div class="pnl" style="display: flex; gap: 20px;">
+        <h5>Total Mill Amount: Rs. {{ total_mill_amount }}</h5>
+        <h5>Total Party Amount: Rs. {{ total_party_amount }}</h5>
+        <h5>NEFT Profit/Loss: Rs. {{ neft_profit_loss }}</h5>
+        <a href="{% url 'download_pl_report' %}">Download</a>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>SL.NO</th>
+                    <th>KL.NO</th>
+                    <th>Mill Name</th>
+                    <th>Party Name</th>
+                    <th>Mill Amount</th>
+                    <th>Party Amount</th>
+                    <th>Profit/Loss</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ transaction.kl_no }}</td>
+                    <td>{{ transaction.mill_name }}</td>
+                    <td>{{ transaction.party_name }}</td>
+                    <td>{{ transaction.mill_amount }}</td>
+                    <td>{{ transaction.party_amount }}</td>
+                    <td>{{ transaction.net_profit_loss }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</center>
+{% endblock %}

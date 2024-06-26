@@ -1,0 +1,51 @@
+{% extends "common.html" %}
+
+{% block title %}Add Ledger Entry{% endblock %}
+
+{% block content %}
+<style>
+    .ledger_entry {
+       padding: 10px;
+       border-radius: 10px;
+       border: 1px solid lightgray;
+       width: 300px;
+       height: 270px;
+       box-shadow: 0 4px 5px rgba(193, 191, 191, 0.2), 
+                    0 -4px 5px rgba(255, 80, 80, 0.2), 
+                    4px 0 4px rgba(141, 139, 139, 0.2), 
+                    -4px 0 4px rgba(58, 57, 57, 0.2);
+    }
+    .ledger_entry:hover{
+        background:rgb(236, 216, 195);
+    }
+</style>
+
+{% for msg in messages %}
+<p>{{ msg }}</p>
+{% endfor %}
+
+<center>
+    <h2>Add Ledger Entry</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="ledger_entry">
+            <label for="{{ form.transaction_date.id_for_label }}">Transaction Date:{{ form.transaction_date }}</label><br><br>
+
+            <label for="{{ form.name.id_for_label }}">Name:{{ form.name }}</label><br><br>
+        
+
+            <label for="{{ form.amount.id_for_label }}">Amount:{{ form.amount }}</label><br><br>
+
+            <label for="{{ form.party_or_mill.id_for_label }}">Party or Mill:{{ form.party_or_mill }}</label><br><br>
+
+
+            <label for="{{ form.ac_name.id_for_label }}">Account Name:{{ form.ac_name }}</label><br><br>
+
+            <label for="{{ form.payment_status.id_for_label }}">Payment Status:{{ form.payment_status }}</label><br><br>
+            
+        <button type="submit">Save</button>
+        </div>
+    </form>
+</center>
+
+{% endblock %}

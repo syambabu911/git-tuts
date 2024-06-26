@@ -1,0 +1,62 @@
+{% extends "common.html" %}
+
+{% block title %}View Debits{% endblock %}
+
+{% block content %}
+<style>
+    table {
+        margin: auto;
+        border-collapse: collapse;
+        margin-top: 50px;
+        width: 50%;
+    }
+    th, td {
+        border: 1px solid #ddd; /* Use a light grey color for the borders */
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    input[type="checkbox"] {
+        margin: 0;
+    }
+    table a{
+        color:red;
+    }
+</style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<table>
+    <thead>
+        <tr>
+            <th>SL.NO</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Interest Rate</th>
+            <th>Earned Interest</th>
+            <th>Date</th>
+            <th>Transaction Type</th>
+            <th>Is Paid</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in entries %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ entry.name }}</td>
+            <td>{{ entry.amount }}</td>
+            <td>{{ entry.interest_rate }}</td>
+            <td>{{ entry.earned_interest }}</td>
+            <td>{{ entry.date }}</td>
+            <td>{{ entry.transaction_type }}</td>
+            <td>
+                <input type="checkbox" {% if entry.is_paid %}checked{% endif %} disabled>
+            </td>
+            <td><a href="{% url 'delete_debit' entry.id %}" title="Delete this user"><i class="fas fa-trash"></i></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

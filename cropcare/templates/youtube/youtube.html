@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My YouTube Clone</title>
+    <!-- Your existing CSS styles -->
+    <style>
+        /* Your existing CSS styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-image: url('https://th.bing.com/th/id/R.602df4049ed4a0b67d4f425c107c99be?rik=R54FS%2brSelmm2Q&riu=http%3a%2f%2fwallsdesk.com%2fwp-content%2fuploads%2f2016%2f05%2fWaterfalls-for-desktop.jpg&ehk=f3gwrgwvwSGj7TnirJRBLfTLkvQQzUWv6pP57sq5FUM%3d&risl=&pid=ImgRaw&r=0');
+            background:linear-gradient(to left,rgb(100, 174, 234), rgb(255, 0, 136));
+        }
+        header {
+            background-color: #e8dddd;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: rgb(234, 86, 86);
+        }
+        #mytube {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .icons {
+            color: rgb(245, 242, 242); 
+            width: 20px;
+            height: 30px;
+        }
+        .menu {
+            color: rgb(245, 242, 242);
+            width: 20px;
+            height: 30px;
+        }
+        #img {
+            width: 50px;
+            height: 35px;
+        }
+        .user-actions a {
+            padding: 40px 20px;
+            color: #3520d8;
+            text-align: right;
+            margin-right: 20px;
+            text-decoration: none;
+        }
+        #searchLink {
+            width: 600px;
+            height: 37px;
+            margin-top:20px;
+            margin-left: 20%;
+            border-radius: 5px;
+        }
+        .video-container {
+            border-radius: 10px;
+            display: flex;
+            padding: 10px;
+        }
+        .video {
+            display: 0 0 auto;
+            margin-left: 70px;
+            margin-right: 5px;
+            padding: 8px;
+        }
+        .video iframe {
+            width: 300px;
+            height: 280px;
+            border-radius: 10px;
+        }
+        .comments {
+            color: rgb(208, 201, 205);
+        }
+        footer {
+            background-color: rgb(100, 101, 100);
+            text-align: center;
+            color: white;
+            padding: 10px;
+            font-size: 20px;
+        }
+        /* New styles for the side menu */
+        #menuButton{
+            background-color: green;
+            border-radius:7px;
+            width:30px;
+            cursor: pointer;
+        }
+        .menuList {
+            background-color: white;
+            width: 140px;
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute; 
+            top: 60px;
+            left: -160px; 
+            transition: left 0.0s ease;
+        }
+        .menuList.active {
+            background-color:rgb(12, 13, 12);
+            left: 0; 
+            color:white;
+            top: 180px; 
+            left:2px;
+            height: 400px;
+        }
+    </style>
+    <!-- Your existing CSS links -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<header>
+    <!-- Header section -->
+    <div id="mytube">
+        <img src="https://www.freeiconspng.com/uploads/logo-youtube-png-clipart-11.png" alt="" id="img">
+        MY UTube
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#"></a>New Version:2025</li>
+        </ul>
+    </nav>
+</header>
+<!-- Main content area -->
+<div class="main" style="height: 100px;">
+    <div style="width: 100%; height: 20px;">
+        <div class="user-actions">
+            <a href="https://www.youtube.com/"><input type="search" id="searchLink" placeholder="Search"></a>
+            <a href="https://www.youtube.com/"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+              </svg>Login</a>
+            <a href="https://www.youtube.com/"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+              </svg>Sign up</a>
+        </div>
+    </div>
+<div class="main">
+    <!-- Toggle button to show/hide side menu -->
+    <button id="menuButton"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="icons" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+    </svg></button><h2 style="color: whitesmoke;">MENU</h2><br><br>
+    <!-- Side menu -->
+    <div class="menuList" id="menuList">
+        <a href="https://www.youtube.com/" class="icons"><span class="material-symbols-outlined home">
+            home
+        </span></a>
+        <p>Home</p><br><br>
+        <a href="https://www.youtube.com/" class="icons"><span class="material-symbols-outlined subscriptions">
+                subscriptions
+        </span></a>
+        <p>Subscription</p><br><br>
+        <a href="https://www.youtube.com/" class='icons'><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4z"/>
+        </svg></a><p>Shorts</p>
+        <br>
+        <hr>
+        <br>
+        <a href="https://www.youtube.com/" class="icons"><span class="material-icons">
+            video_library
+            </span></a><p>Library</p><br>
+    </div>
+    <div class="menu">
+        <a href="https://www.youtube.com/" class="icons"><span class="material-symbols-outlined home">
+            home
+        </span></a>
+        <p>Home</p><br><br>
+        <a href="https://www.youtube.com/" class="icons"><span class="material-symbols-outlined subscriptions">
+                subscriptions
+        </span></a>
+        <p>Subscription</p><br><br>
+        <a href="https://www.youtube.com/" class='icons'><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4z"/>
+        </svg></a><p>Shorts</p><br><br>
+        <a href="https://www.youtube.com/" class="icons"><span class="material-icons">
+            video_library
+            </span></a><p>Library</p>
+    </div>
+    <div class="video-container">
+        <div class="video"><iframe src="https://www.youtube.com/embed/KUN5Uf9mObQ?si=wrfa97IbqmyqtS7D" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="video"><iframe src="https://www.youtube.com/embed/xEPfCl_Frhs?si=HQIylB5ejFw1U8O5" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></iframe></div>
+        <div class="video"><iframe src="https://www.youtube.com/embed/BbsHW-Y2eME?si=STv1C-oKhOslddYV" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></iframe></div>
+    </div>
+    <div class="video-container">
+        <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/g_Q6iGiQej4?si=MFBqvqLsGewY0nc1" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></iframe></div>
+        <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/oGneAab3e88?si=tJJYOWNvRYd2PbaN" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></iframe></div>
+        <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/O8D1Uj-2g9Q?si=-w2ei57EpF0zbBui" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></iframe></div>
+    </div>
+    <!-- Comments section -->
+    <div class="comments">
+        <h2>Comments</h2>
+    </div>
+    <!-- Footer section -->
+    <footer>
+        <p>2025 New Version MyTube .I have all rights because this my website </p>
+    </footer>
+</div>
+<!-- Your existing JavaScript links -->
+<script>
+    // JavaScript for toggling the side menu
+    const menuButton = document.getElementById("menuButton");
+    const menuList = document.getElementById("menuList");
+
+    menuButton.addEventListener("click", function() {
+        menuList.classList.toggle("active");
+    });
+</script>
+</body>
+</html>

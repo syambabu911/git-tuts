@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake and Ladder Game</title>
+    <link rel="stylesheet" type="text/css" href="{% static '\css\game/style.css' %}">
+
+</head>
+<body>
+    <h1 style="background:linear-gradient(65deg,green,skyblue,orange);color:rgb(240, 238, 246);border-radius: 5px;">SYAM DESIGNING OF VYKUNTAPALI 🏂</h1>
+    <div id="gameBoard"></div>
+    <div id="controls">
+        <button id="rollDice">Roll Dice</button>
+        <div id="diceContainer">
+            <span id="diceSymbol"><img src="{% static 'media\img.gif' %}" alt="dice logo" width="50px" height="50px"></span>
+            <span id="diceNumber"></span>
+        </div>
+        <p>Player 1 Position: <span id="player1Pos">1</span></p>
+        <p>Player 2 Position: <span id="player2Pos">1</span></p>
+        <p>Current Turn:<span id="currentTurn">Player 1</span></p>
+        <p>Dice Result: <span id="diceResult">0</span></p>
+        <p>snakes:
+            <h4>
+            16: 6,
+            47: 26,
+            49: 11,
+            56: 53,
+            62: 19,
+            64: 60,
+            87: 24,
+            93: 73,
+            95: 75,
+            98: 78,
+           </h4>
+        </p>
+        <p>ladders:
+            <h4>
+                1: 38,
+                4: 14,
+                9: 31,
+                21: 42,
+                28: 84,
+                36: 44,
+                51: 67,
+                71: 91,
+                80: 100,
+            </h4>
+        </p>
+    </div>
+    <script src="{% static 'js/active_script.js' %}"></script>
+</body>
+</html>
